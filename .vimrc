@@ -9,20 +9,21 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'bling/vim-airline'
 Plugin 'mattn/emmet-vim'
 Plugin 'altercation/vim-colors-solarized'
-Plugin 'kchmck/vim-coffee-script'
+" Plugin 'kchmck/vim-coffee-script'
 Plugin 'kien/ctrlp.vim'
+Plugin 'FelikZ/ctrlp-py-matcher'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround.git'
-Plugin 'vim-scripts/grails-vim'
+" Plugin 'vim-scripts/grails-vim'
 Plugin 'wellle/targets.vim'
 Plugin 'Raimondi/delimitMate'
 Plugin 'obvious-resize'
-
 " Plugin 'scrooloose/syntastic'
-
-Plugin 'burnettk/vim-angular'
+" Plugin 'burnettk/vim-angular'
+Plugin 'pangloss/vim-javascript'
 Plugin 'othree/javascript-libraries-syntax.vim'
 Plugin 'scrooloose/nerdtree'
+Plugin 'editorconfig/editorconfig-vim'
 
 call vundle#end()
 
@@ -70,6 +71,18 @@ if has("autocmd") && exists("+omnifunc")
 
 " ctrl p config
 set wildignore+=*/node_modules/*,*/bower_components/*,*/dist/*,*/coverage/*,tmp/*,*.class
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_working_path_mode = 'ra'
+set grepprg=ag\ --nogroup\ --nocolor
+let g:ctrlp_user_command = {
+      \'types': {
+        \1: ['.git', 'cd %s && git ls-files . -co --exclude-standard'],
+      \},
+      \'fallback': 'ag %s -l --nocolor -g ""'
+\}
+let g:ctrlp_lazy_update = 300
+let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 
 " Fix airline on startup
 set laststatus=2
@@ -108,6 +121,9 @@ nmap <C-L> :ObviousResizeRight<CR>
 nmap <C-M> :nohlsearch<CR>
 nmap <C-F> :NERDTree<CR>
 nmap <C-D> :NERDTreeFind<CR>
+
+" Map yank to system clipboard.
+set clipboard=unnamedplus
 
 " Do not execute dangerous scripts.
 set secure
