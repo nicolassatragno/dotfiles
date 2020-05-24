@@ -104,6 +104,8 @@ inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?
       \ "\" \\<lt>bs>\\<lt>C-n>\"\<CR>"
 imap <C-@> <C-Space>
 
+au BufNewFile,BufRead *.p8 setlocal ft=lua
+
 " Per project configuration.
 set exrc
 
