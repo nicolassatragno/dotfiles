@@ -24,6 +24,8 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'othree/javascript-libraries-syntax.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'editorconfig/editorconfig-vim'
+Plugin 'ycm-core/YouCompleteMe'
+Plugin 'junegunn/vim-peekaboo'
 
 call vundle#end()
 
@@ -39,6 +41,21 @@ set backspace=2
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
+
+" clangd settings
+" Let clangd fully control code completion
+let g:ycm_clangd_uses_ycmd_caching = 0
+" Use installed clangd, not YCM-bundled clangd which doesn't get updates.
+let g:ycm_clangd_binary_path = exepath("clangd")
+
+" shortcuts
+nmap gd :YcmCompleter GoToDeclaration<CR>
+nmap gD :YcmCompleter GoToDefinition<CR>
+nmap gm :YcmCompleter GoToImplementation<CR>
+nmap tt :YcmCompleter GetType<CR>
+nmap <C-s> :YcmCompleter FixIt<CR>
+nmap <C-c> :YcmDiags<CR>
+let g:ycm_always_populate_location_list = 1
 
 " 80 chars FTW
 set cc=80
